@@ -12,7 +12,7 @@ class SongCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Get.toNamed('/song', arguments: song);
       },
       child: Container(
@@ -23,14 +23,13 @@ class SongCard extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * 0.45,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                image: DecorationImage(
-                  image: AssetImage(
-                    song.coverUrl,
-                  ),
-                  fit: BoxFit.cover,
-                )
-              ),
+                  borderRadius: BorderRadius.circular(15.0),
+                  image: DecorationImage(
+                    image: AssetImage(
+                      song.coverUrl,
+                    ),
+                    fit: BoxFit.cover,
+                  )),
             ),
             Container(
               height: 50,
@@ -38,8 +37,7 @@ class SongCard extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
-                  color: Colors.white.withOpacity(0.8)
-              ),
+                  color: Colors.white.withOpacity(0.8)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -49,13 +47,10 @@ class SongCard extends StatelessWidget {
                     children: [
                       Text(
                         song.title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(
-                          color: Colors.deepPurple,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              color: Colors.deepPurple,
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       Text(
                         song.title,
@@ -66,7 +61,7 @@ class SongCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Icon(Icons.play_circle,color: Colors.deepPurple),
+                  const Icon(Icons.play_circle, color: Colors.deepPurple),
                 ],
               ),
             ),

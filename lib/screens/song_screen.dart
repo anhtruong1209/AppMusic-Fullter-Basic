@@ -11,19 +11,17 @@ class SongScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _SongScreenState();
 }
 
-class _SongScreenState extends State<SongScreen>{
+class _SongScreenState extends State<SongScreen> {
   AudioPlayer audioPlayer = AudioPlayer();
   Song song = Song.songs[0];
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     audioPlayer.setAudioSource(
       ConcatenatingAudioSource(
-        children:[
-          AudioSource.uri(
-              Uri.parse('assets:///${song.url}')
-          ),
+        children: [
+          AudioSource.uri(Uri.parse('assets:///${song.url}')),
         ],
       ),
     );
@@ -38,9 +36,9 @@ class _SongScreenState extends State<SongScreen>{
   Stream<SeekBarData> get _seekBarDataStream =>
       rxdart.Rx.combineLatest2<Duration, Duration?, SeekBarData>(
           audioPlayer.positionStream, audioPlayer.durationStream, (
-          Duration position,
-          Duration? duration,
-          ) {
+        Duration position,
+        Duration? duration,
+      ) {
         return SeekBarData(
           position,
           duration ?? Duration.zero,
@@ -48,11 +46,7 @@ class _SongScreenState extends State<SongScreen>{
       });
 
   @override
-    Widget build(BuildContext context){
-
-
-
-
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -69,14 +63,13 @@ class _SongScreenState extends State<SongScreen>{
           const _BackgroundFilter(),
           StreamBuilder<SeekBarData>(
             stream: _seekBarDataStream,
-            builder:
-            (context, snapshot){
-             final positionData = snapshot.data;
-             return SeekBar(
-               position: positionData?.duration ?? Duration.zero,
-               duration: positionData?.duration ?? Duration.zero,
-               onChanged: audioPlayer.seek,
-             );
+            builder: (context, snapshot) {
+              final positionData = snapshot.data;
+              return SeekBar(
+                position: positionData?.duration ?? Duration.zero,
+                duration: positionData?.duration ?? Duration.zero,
+                onChanged: audioPlayer.seek,
+              );
             },
           ),
         ],
@@ -85,12 +78,11 @@ class _SongScreenState extends State<SongScreen>{
   }
 }
 
-
 class _BackgroundFilter extends StatelessWidget {
   const _BackgroundFilter({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ShaderMask(
       shaderCallback: (rect) {
         return LinearGradient(
@@ -101,8 +93,11 @@ class _BackgroundFilter extends StatelessWidget {
               Colors.white.withOpacity(0.5),
               Colors.white.withOpacity(0.0),
             ],
-            stops: const [0.0,0.4,0.6]
-        ).createShader(rect);
+            stops: const [
+              0.0,
+              0.4,
+              0.6
+            ]).createShader(rect);
       },
       blendMode: BlendMode.dstOut,
       child: Container(

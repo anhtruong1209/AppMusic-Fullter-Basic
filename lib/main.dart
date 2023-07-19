@@ -18,16 +18,15 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: Colors.white,
-          displayColor: Colors.white,
-        )
-      ),
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: Colors.white,
+                displayColor: Colors.white,
+              )),
       home: const SongScreen(),
       getPages: [
-        GetPage(name: '/', page: ()=> const HomeScreen()),
-        GetPage(name: '/song', page: ()=> const SongScreen()),
-        GetPage(name: '/playlist', page: ()=> const PlaylistScreen()),
+        GetPage(name: '/', page: () => const HomeScreen()),
+        GetPage(name: '/song', page: () => const SongScreen()),
+        GetPage(name: '/playlist', page: () => const PlaylistScreen()),
       ],
     );
   }

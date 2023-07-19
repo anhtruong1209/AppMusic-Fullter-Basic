@@ -14,7 +14,7 @@ class PlaylistCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Get.toNamed('/playlist', arguments: playlist);
       },
       child: Container(
@@ -63,8 +63,7 @@ class PlaylistCard extends StatelessWidget {
                 icon: const Icon(
                   Icons.play_circle,
                   color: Colors.white,
-                )
-            )
+                ))
           ],
         ),
       ),

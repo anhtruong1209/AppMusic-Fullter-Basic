@@ -4,28 +4,28 @@ import 'package:untitled/widgets/song_cart.dart';
 import '../models/song_model.dart';
 import '../widgets/playlist_card.dart';
 import '../widgets/section_header.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     List<Song> songs = Song.songs;
     List<Playlist> playlists = Playlist.playlists;
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.deepPurple.shade800.withOpacity(0.8),
-            Colors.deepPurple.shade200.withOpacity(0.8)
-          ],
-        )
-      ),
+          gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Colors.deepPurple.shade800.withOpacity(0.8),
+          Colors.deepPurple.shade200.withOpacity(0.8)
+        ],
+      )),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar:const _CustomAppBar(),
-        bottomNavigationBar:const _CustomNavBar(),
+        appBar: const _CustomAppBar(),
+        bottomNavigationBar: const _CustomNavBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -43,7 +43,8 @@ class HomeScreen extends StatelessWidget {
                       itemCount: playlists.length,
                       itemBuilder: (context, index) {
                         return PlaylistCard(playlist: playlists[index]);
-                    },)
+                      },
+                    )
                   ],
                 ),
               ),
@@ -98,7 +99,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const _CustomAppBar({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
@@ -108,8 +109,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           margin: const EdgeInsets.only(right: 20),
           child: const CircleAvatar(
             backgroundImage: NetworkImage(
-              'https://github.com/anhtruong1209/AIP490-resource/blob/main/team/ava1.jpg?raw=true'
-            ),
+                'https://github.com/anhtruong1209/AIP490-resource/blob/main/team/ava1.jpg?raw=true'),
           ),
         )
       ],
@@ -132,22 +132,13 @@ class _CustomNavBar extends StatelessWidget {
       showUnselectedLabels: false,
       showSelectedLabels: false,
       items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home'
-        ),
+            icon: Icon(Icons.favorite_outline), label: 'Favorites'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline),
-            label: 'Favorites'
-        ),
+            icon: Icon(Icons.play_circle_outline), label: 'Play'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.play_circle_outline),
-            label: 'Play'
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.people_outlined),
-            label: 'Profile'
-        )
+            icon: Icon(Icons.people_outlined), label: 'Profile')
       ],
     );
   }
@@ -163,8 +154,7 @@ class _DiscoverMusic extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Welcome',
-              style: Theme.of(context).textTheme.bodyLarge),
+          Text('Welcome', style: Theme.of(context).textTheme.bodyLarge),
           const SizedBox(height: 5),
           Text(
             'Enjoy favorite music',
@@ -183,8 +173,7 @@ class _DiscoverMusic extends StatelessWidget {
                   .textTheme
                   .bodyMedium!
                   .copyWith(color: Colors.grey.shade400),
-              prefixIcon:
-              Icon(Icons.search, color: Colors.grey.shade400),
+              prefixIcon: Icon(Icons.search, color: Colors.grey.shade400),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide.none,
@@ -196,4 +185,3 @@ class _DiscoverMusic extends StatelessWidget {
     );
   }
 }
-
