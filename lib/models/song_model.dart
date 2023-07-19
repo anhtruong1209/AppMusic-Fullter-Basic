@@ -3,6 +3,7 @@ class Song {
   final String description;
   final String url;
   final String coverUrl;
+
   Song({
     required this.title,
     required this.description,
@@ -12,19 +13,28 @@ class Song {
 
   static List<Song> songs = [
     Song(
-        title: 'Glass',
-        description: 'Glass',
-        url: 'assets/music/glass.mp3',
-        coverUrl: 'assets/images/glass.jpg'),
+      title: 'Nếu Phải Xa Nhau',
+      description: 'Nếu Phải Xa Nhau - Anh Trường ft Hoàng Nhật Nam',
+      url: 'assets/music/neuphaixanhau.mp3',
+      coverUrl: 'assets/images/anhtruong.jpg',
+    ),
     Song(
-        title: 'Illusions',
-        description: 'Illusions',
-        url: 'assets/music/illusions.mp3',
-        coverUrl: 'assets/images/illusions.jpg'),
+      title: 'Glass',
+      description: 'Glass',
+      url: 'assets/music/glass.mp3',
+      coverUrl: 'assets/images/glass.jpg',
+    ),
     Song(
-        title: 'Pray',
-        description: 'Pray',
-        url: 'assets/music/pray.mp3',
-        coverUrl: 'assets/images/pray.jpg'),
+      title: 'Illusions',
+      description: 'Illusions',
+      url: 'assets/music/illusions.mp3',
+      coverUrl: 'assets/images/illusions.jpg',
+    ),
+    Song(
+      title: 'Pray',
+      description: 'Pray',
+      url: 'assets/music/pray.mp3',
+      coverUrl: 'assets/images/pray.jpg',
+    )
   ];
 }

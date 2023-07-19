@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/models/playlist_model.dart';
-import 'package:untitled/widgets/song_cart.dart';
+
+import '../models/playlist_model.dart';
 import '../models/song_model.dart';
-import '../widgets/playlist_card.dart';
-import '../widgets/section_header.dart';
+import '../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,16 +11,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Song> songs = Song.songs;
     List<Playlist> playlists = Playlist.playlists;
+
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [
-          Colors.deepPurple.shade800.withOpacity(0.8),
-          Colors.deepPurple.shade200.withOpacity(0.8)
-        ],
-      )),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.deepPurple.shade800.withOpacity(0.8),
+            Colors.deepPurple.shade200.withOpacity(0.8),
+          ],
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const _CustomAppBar(),
@@ -31,26 +32,40 @@ class HomeScreen extends StatelessWidget {
             children: [
               const _DiscoverMusic(),
               _TrendingMusic(songs: songs),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    const SectionHeader(title: 'Playlists'),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.only(top: 20),
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: playlists.length,
-                      itemBuilder: (context, index) {
-                        return PlaylistCard(playlist: playlists[index]);
-                      },
-                    )
-                  ],
-                ),
-              ),
+              _PlaylistMusic(playlists: playlists),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _PlaylistMusic extends StatelessWidget {
+  const _PlaylistMusic({
+    Key? key,
+    required this.playlists,
+  }) : super(key: key);
+
+  final List<Playlist> playlists;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          const SectionHeader(title: 'Playlists'),
+          ListView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(top: 20),
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: playlists.length,
+            itemBuilder: ((context, index) {
+              return PlaylistCard(playlist: playlists[index]);
+            }),
+          ),
+        ],
       ),
     );
   }
@@ -95,57 +110,10 @@ class _TrendingMusic extends StatelessWidget {
   }
 }
 
-class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _CustomAppBar({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      leading: const Icon(Icons.grid_view_rounded),
-      actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 20),
-          child: const CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://github.com/anhtruong1209/AIP490-resource/blob/main/team/ava1.jpg?raw=true'),
-          ),
-        )
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(56.0);
-}
-
-class _CustomNavBar extends StatelessWidget {
-  const _CustomNavBar({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.deepPurple.shade800,
-      unselectedItemColor: Colors.white,
-      showUnselectedLabels: false,
-      showSelectedLabels: false,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline), label: 'Favorites'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.play_circle_outline), label: 'Play'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.people_outlined), label: 'Profile')
-      ],
-    );
-  }
-}
-
 class _DiscoverMusic extends StatelessWidget {
-  const _DiscoverMusic({Key? key}) : super(key: key);
+  const _DiscoverMusic({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -154,18 +122,22 @@ class _DiscoverMusic extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Welcome', style: Theme.of(context).textTheme.bodyLarge),
+          Text(
+            'Welcome',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
           const SizedBox(height: 5),
           Text(
-            'Enjoy favorite music',
+            'Enjoy your favorite music',
             style: Theme.of(context)
                 .textTheme
-                .titleLarge
-                ?.copyWith(fontWeight: FontWeight.bold),
+                .headline6!
+                .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
+              isDense: true,
               filled: true,
               fillColor: Colors.white,
               hintText: 'Search',
@@ -179,9 +151,73 @@ class _DiscoverMusic extends StatelessWidget {
                 borderSide: BorderSide.none,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
+}
+
+class _CustomNavBar extends StatelessWidget {
+  const _CustomNavBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.deepPurple.shade800,
+      unselectedItemColor: Colors.white,
+      selectedItemColor: Colors.white,
+      showUnselectedLabels: false,
+      showSelectedLabels: false,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite_outline),
+          label: 'Favorites',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.play_circle_outline),
+          label: 'Play',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.people_outline),
+          label: 'Profile',
+        ),
+      ],
+    );
+  }
+}
+
+class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _CustomAppBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: const Icon(Icons.grid_view_rounded),
+      actions: [
+        Container(
+          margin: const EdgeInsets.only(right: 20),
+          child: const CircleAvatar(
+            backgroundImage: NetworkImage(
+              'https://images.unsplash.com/photo-1659025435463-a039676b45a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56.0);
 }

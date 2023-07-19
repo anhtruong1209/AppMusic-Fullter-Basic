@@ -51,19 +51,20 @@ class PlaylistCard extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '${playlist.songs.length} song',
+                    '${playlist.songs.length} songs',
                     maxLines: 2,
                     style: Theme.of(context).textTheme.bodySmall,
-                  )
+                  ),
                 ],
               ),
             ),
             IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.play_circle,
-                  color: Colors.white,
-                ))
+              onPressed: () {},
+              icon: const Icon(
+                Icons.play_circle,
+                color: Colors.white,
+              ),
+            ),
           ],
         ),
       ),
